@@ -25,7 +25,7 @@ function RegistrationForm({ onRegister }) {
 
         try {
             const userData = { firstname, lastname, email, phonenumber, password };
-            const response = await fetch('', {
+            const response = await fetch('http://localhost:5000/api/register', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',

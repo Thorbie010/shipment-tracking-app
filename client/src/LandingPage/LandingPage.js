@@ -15,7 +15,7 @@ function LandingPage( { isLargeScreen }) {
 
     const trackShipment = async () => {
         try {
-            const response = await fetch('', {
+            const response = await fetch('http://localhost:5000/shipments', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
