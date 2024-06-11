@@ -4,43 +4,37 @@ const sequelize = new Sequelize('qc_logi', 'root', 'password', {
     dialect: 'mysql',
 });
 
-const User = sequelize.define('User', {
-    firstname: {
+// Import the User model
+const User = require('./User');
+
+const Order = sequelize.define('Order', {
+    orderNumber: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
+    },
+    items: {
+        type: DataTypes.JSON,
+        allowNull: false,
+    },
+    pickupAddress: {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    lastname: {
+    deliveryAddress: {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    email: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true
-    },
-    phonenumber: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true
-    },
-    photoname: {
-        type: DataTypes.STRING,
-        allowNull: true,
-        unique: true
-    },
-    password: {
+    status: {
         type: DataTypes.STRING,
         allowNull: false,
     },
 }, {
     // Other options...
     timestamps: true,
-    createdAt: false,
-    updatedAt: false,
+    createdAt: 'created_at',
+    updatedAt: 'updated_at',
 });
-
-// Import the Order model
-const Order = require('./ShipmentOrder');
 
 // Establish a relationship between User and Order
 User.hasMany(Order, { foreignKey: 'userId' });
@@ -49,10 +43,10 @@ Order.belongsTo(User, { foreignKey: 'userId' });
 (async () => {
     try {
         await sequelize.sync();
-        console.log('User model synchronised with database.');
+        console.log('Order model synchronised with database.');
     } catch (error) {
-        console.error('Error synchronising user model with database', error);
+        console.error('Error synchronising order model with database', error);
     }
 })();
 
-module.exports = User;
+module.exports = Order;

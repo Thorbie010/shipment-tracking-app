@@ -1,5 +1,7 @@
 import React, { useState} from "react";
 import { Link } from "react-router-dom";
+import "../styles.css"
+import { LoadingDots } from "../Utilities/Utilities";
 
 function LoginForm({ onLogin, registrationSuccess }){
     const [email, setEmail] = useState('');
@@ -30,18 +32,19 @@ function LoginForm({ onLogin, registrationSuccess }){
             setEmail("");
             setPassword("");
             setError(null);
-            setIsLoading(false);
             onLogin();
         } catch (error) {
             console.error("Error:", error);
             setError("Something went wrong. Please try again later.");
             setIsLoading(false);
+        } finally{
+            setIsLoading(false);
         }
     };
-
+    
     return (
-        <div className="max-w-md mx-auto mt-8 p-6 bg-white shadow-md">
-            <h2 className="text-2xl font-sembold mb-4 text-center font-bold">Sign In</h2>
+        <div className="login-reg-div">
+            <h2 className="form-header">Sign In</h2>
             {registrationSuccess && <p className="text-red-500 mb-4">Please login to continue</p>}
             <form onSubmit={handleSubmit}>
                 <div className="mb-4">
@@ -51,7 +54,7 @@ function LoginForm({ onLogin, registrationSuccess }){
                         value={email}
                         placeholder="Email"
                         onChange={(e) => setEmail(e.target.value)} 
-                        className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-400"
+                        className="field-input"
                     />
                 </div>
                 <div className="mb-4">
@@ -61,10 +64,12 @@ function LoginForm({ onLogin, registrationSuccess }){
                         value={password}
                         placeholder="Password"
                         onChange={(e) => setPassword(e.target.value)}
-                        className="w-full mt-5 border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-400" 
+                        className="field-input" 
                     />
                 </div>
-                <button type="submit" disabled={isLoading} className="w-full mt-5 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Login</button>
+                <button type="submit" disabled={isLoading} className={`w-full mt-3 bg-blue-500 text-white px-4 ${isLoading ? 'bg-blue-800 py-4' : 'py-2'} rounded-md hover:bg-blue-800`}>
+                    {isLoading? <LoadingDots /> : 'Login'}
+                </button>
                 {error && <p className="text-red-500">{error}</p>}
                 <p className="text-center mt-5">Don't have an account? <Link to={'/Register'}><span className="font-semibold underline">Sign Up</span></Link></p>
             </form>
