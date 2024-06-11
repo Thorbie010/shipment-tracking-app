@@ -23,6 +23,13 @@ module.exports = {
       boxShadow: {
         'pronounced': '0 10px 15px rgba(0, 0, 0, 0.5)', // Custom shadow with more intensity
       },
+      screens: {
+        sm: '380px',
+        md: '768px',
+        lg: '1024px',
+        xl: '1280px',
+        '2xl': '1536px',
+      },
     },
   },
   plugins: [],

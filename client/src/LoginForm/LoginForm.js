@@ -2,8 +2,10 @@ import React, { useState} from "react";
 import { Link } from "react-router-dom";
 import "../styles.css"
 import { LoadingDots } from "../Utilities/Utilities";
+import { useAppContext } from "../App/AppContext";
 
-function LoginForm({ onLogin, registrationSuccess }){
+function LoginForm(){
+    const {handleLogin, registrationSuccess} = useAppContext();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -32,7 +34,7 @@ function LoginForm({ onLogin, registrationSuccess }){
             setEmail("");
             setPassword("");
             setError(null);
-            onLogin();
+            handleLogin();
         } catch (error) {
             console.error("Error:", error);
             setError("Something went wrong. Please try again later.");
@@ -67,7 +69,7 @@ function LoginForm({ onLogin, registrationSuccess }){
                         className="field-input" 
                     />
                 </div>
-                <button type="submit" disabled={isLoading} className={`w-full mt-3 bg-blue-500 text-white px-4 ${isLoading ? 'bg-blue-800 py-4' : 'py-2'} rounded-md hover:bg-blue-800`}>
+                <button type="submit" disabled={isLoading} className={`w-full mt-3 bg-gray-800 text-white px-4 ${isLoading ? 'bg-gray-600 py-6' : 'py-4'} rounded-md hover:bg-gray-600`}>
                     {isLoading? <LoadingDots /> : 'Login'}
                 </button>
                 {error && <p className="text-red-500">{error}</p>}

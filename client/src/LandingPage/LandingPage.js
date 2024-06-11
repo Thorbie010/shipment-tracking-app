@@ -6,8 +6,10 @@ import box from '../assets/box.svg';
 import ShipmentDetails from '../ShipmentDetails/ShipmentDetails';
 import { Link } from "react-router-dom";
 import hero_image from '../assets/hero_image.jpg'
+import { useAppContext } from '../App/AppContext';
 
-function LandingPage( { isLargeScreen }) {
+function LandingPage() {
+    const {isLargeScreen} = useAppContext();
     const [trackingId, setTrackinId] = useState('');
     const [shipmentData, setShipmentData] = useState(null);
     const [error, setError] = useState(null);
