@@ -1,5 +1,6 @@
 const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = new Sequelize('qc_logi', 'root', 'password', {
+
+const sequelize = new Sequelize('qc_logi', 'root', 'password',{
     host: 'localhost',
     dialect: 'mysql',
 });
@@ -9,42 +10,41 @@ const User = sequelize.define('User', {
         type: DataTypes.STRING,
         allowNull: false,
     },
+
     lastname: {
         type: DataTypes.STRING,
         allowNull: false,
     },
+
     email: {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true
     },
+
     phonenumber: {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true
     },
+
     photoname: {
         type: DataTypes.STRING,
         allowNull: true,
         unique: true
     },
+
     password: {
         type: DataTypes.STRING,
         allowNull: false,
     },
-}, {
-    // Other options...
-    timestamps: true,
-    createdAt: false,
-    updatedAt: false,
+
+    }, {
+      // Other options...
+      timestamps: true,
+      createdAt: false,
+      updatedAt: false,
 });
-
-// Import the Order model
-const Order = require('./ShipmentOrder');
-
-// Establish a relationship between User and Order
-User.hasMany(Order, { foreignKey: 'userId' });
-Order.belongsTo(User, { foreignKey: 'userId' });
 
 (async () => {
     try {

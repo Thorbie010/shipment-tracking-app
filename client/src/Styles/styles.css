@@ -44,7 +44,7 @@
         @apply w-full h-full border border-gray-500 rounded-md py-4 mt-3 px-4 focus:outline-none focus:border-blue-400
     }
     .login-reg-div {
-        @apply max-w-lg mx-10 lg:mx-auto mt-20 p-6
+        @apply max-w-lg mx-10 mx-auto md:mt-20 p-6 my-40 md:mt-auto
     }
     .reg-div {
         @apply max-w-lg mx-auto mb-10 mt-8 p-6

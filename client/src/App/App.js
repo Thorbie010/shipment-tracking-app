@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
@@ -6,7 +6,7 @@ import LoginForm from '../LoginForm/LoginForm';
 // import Dashboard from '../Dashboard/Dashboard';
 import RegistrationForm from '../RegistrationForm/RegistrationForm';
 import LandingPage from '../LandingPage/LandingPage';
-import '../styles.css';
+import '../Styles/styles.css';
 import ShipmentDetails from "../ShipmentDetails/ShipmentDetails";
 import EditProfile from "../Profile/EditProfile";
 import { useAppContext, AppProvider } from "./AppContext";

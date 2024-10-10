@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Navigate, Link } from "react-router-dom";
-import '../styles.css';
+import '../Styles/styles.css';
 import { LoadingDots } from "../Utilities/Utilities";
 import { useAppContext } from "../App/AppContext";
 
 function RegistrationForm() {
-    const {onRegister} = useAppContext();
+    const {handleRegister} = useAppContext();
     const [firstname, setFirstname] = useState('');
     const [lastname, setLastname] = useState('');
     const [email, setEmail] = useState('');
@@ -29,7 +29,7 @@ function RegistrationForm() {
 
         try {
             const userData = { firstname, lastname, email, phonenumber, password };
-            const response = await fetch('http://localhost:5000/api/register', {
+            const response = await fetch('https://localhost:5000/api/register', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
@@ -40,7 +40,7 @@ function RegistrationForm() {
             if (response.ok) {
               console.log('Registration successful!');
               setRegistrationSuccess(true);
-              onRegister(true);
+              handleRegister()
             } else {
               console.error('Registration failed.');
             }
@@ -61,7 +61,7 @@ function RegistrationForm() {
         <div className="reg-div">
             <h2 className="form-header">Register</h2>
             <form onSubmit={handleSubmit}>
-                <div className="flex sm:flex-col lg:flex-row ">
+                <div className="flex flex-col lg:flex-row ">
                     <div className="mb-4">
                         <input 
                             type="text" 

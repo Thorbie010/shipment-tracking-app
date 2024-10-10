@@ -1,46 +1,63 @@
-import React, { useState} from "react";
+import React, { useEffect, useState} from "react";
 import { Link } from "react-router-dom";
-import "../styles.css"
+import "../Styles/styles.css";
 import { LoadingDots } from "../Utilities/Utilities";
 import { useAppContext } from "../App/AppContext";
 
-function LoginForm(){
-    const {handleLogin, registrationSuccess} = useAppContext();
+function LoginForm() {
+    const { handleLogin, resetRegistrationSuccess, registrationSuccess } = useAppContext();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
+
+    useEffect(() => {
+        if (registrationSuccess) {
+            const timer = setTimeout(() => {
+                resetRegistrationSuccess();
+            }, 5000);
+
+            return () => clearTimeout(timer);
+        }
+    }, [registrationSuccess, resetRegistrationSuccess]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError(null);
         setIsLoading(true);
 
-        try{
-            const response = await fetch("http://localhost:5000/api/login", {
+        try {
+            const response = await fetch("https://localhost:5000/api/login", {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ email, password })
+                body: JSON.stringify({ email, password }),
             });
+
             if (!response.ok) {
-                if (response.status === 401) {
+                if (response.status === 400) {
                     throw new Error("Invalid email or password");
                 }
                 throw new Error("Something went wrong");
             }
 
+            const data = await response.json();
+            const token = data.token;
+
+            sessionStorage.setItem("token", token);
+
             setEmail("");
             setPassword("");
             setError(null);
             handleLogin();
+            
         } catch (error) {
             console.error("Error:", error);
-            setError("Something went wrong. Please try again later.");
+            setError("invalid email or password.");
             setIsLoading(false);
-        } finally{
-            setIsLoading(false);
+        } finally {
+            setIsLoading(false)
         }
     };
     

@@ -18,14 +18,20 @@ export const AppProvider = ({ children }) => {
 
     const handleLogin = () => {
         setIsLoggedIn(true);
+        sessionStorage.setItem('isLoggedIn', 'true');
     };
 
     const handleRegister = () => {
         setRegistrationSuccess(true);
     };
 
+    const resetRegistrationSuccess = () => {
+        setRegistrationSuccess(false);
+    };
+
     const handleSignOut = () => {
         setIsLoggedIn(false);
+        sessionStorage.setItem('isLoggedIn', 'false');
     };
 
     useEffect(() => {
@@ -56,7 +62,8 @@ export const AppProvider = ({ children }) => {
                 isLargeScreen, 
                 isSidebarOpen, 
                 isOpen, 
-                toggleDropdown, 
+                toggleDropdown,
+                resetRegistrationSuccess, 
                 handleLogin, 
                 handleRegister, 
                 handleSignOut, 

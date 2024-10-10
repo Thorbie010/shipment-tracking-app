@@ -14,7 +14,7 @@ function Header() {
 
     return (
         <header className="bg-white-800 text-black py-4 px-6">
-            <div className={`max-w-screen-xl ${isLargeScreen ? 'mx-40' : 'mx-auto'} h-10 font-semibold flex items-center justify-between`}>
+            <div className={`max-w-screen-xl ${isLargeScreen ? 'mx-30' : 'mx-auto'} h-10 font-semibold flex items-center justify-between`}>
             <Link to="/" ><img alt="logo" src={QC2} className="h-40 w-40"/></Link>
             <div className="flex items-center">
                     {isLargeScreen && (
@@ -26,7 +26,7 @@ function Header() {
                         </nav>
                     )}
                     {!isLoggedIn ? (
-                        <Link to="/login" className={`text-red-500 font-semibold ${isLargeScreen ? 'ml-60 bg-red-500 text-white h-10 py-5 px-5 flex items-center border rounded' : 'mr-5'}`}>Sign In/Sign Up</Link>
+                        <Link to="/login" className={`text-red-500 font-semibold ${isLargeScreen ? 'ml-[100px] bg-red-500 text-white h-10 py-5 px-5 flex items-center border rounded' : 'mr-5'}`}>Sign In/Sign Up</Link>
                     ) : (
                         <div className={`${isLargeScreen ? 'ml-60 flex flex-row' : 'flex flex-row' }`}>
                             <Link to={''}><img alt="notification" src={notification} className="h-8 mr-5"/></Link>
@@ -48,7 +48,7 @@ function Header() {
                     )}
                     {!isLargeScreen && (
                         <button 
-                            className="md:hidden"
+                            className=""
                             onClick={toggleSidebar}
                         >
                             {isSidebarOpen ? <img alt="close" src={close} className="h-8" /> : <img alt="menu" src={menu} className="h-8"/>}
